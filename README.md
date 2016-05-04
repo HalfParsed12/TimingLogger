@@ -1,6 +1,7 @@
 # Timing Logger
 
-This is a personal project of mine, written in C#. The aim is to provide data to help players of Project Cars improve their driving by becoming more consistent.
+This is a personal project of mine, written in C# using Visual Studio. The aim is to provide data to help players of Project Cars improve their driving by becoming more consistent.
+It gets timing data from pCARS' shared memory, which the CREST API outputs in json format. Timing Logger periodically checks this data to get up-to-date timing information.
 
 ## Features
 <ul>
@@ -10,7 +11,7 @@ This is a personal project of mine, written in C#. The aim is to provide data to
 
 ## Coming soon
 <ul>
-<li>Ability to save and recall previous sessions</li>
-<li>Compare sessions</li>
+<li>Record and compare multiple sessions</li>
 <li>Add comments to sessions (e.g. car setup changes)</li>
+<li>Save and recall previous sessions</li>
 </ul>
