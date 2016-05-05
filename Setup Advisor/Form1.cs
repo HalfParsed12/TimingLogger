@@ -47,7 +47,7 @@ namespace Setup_Advisor
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            // TODO: telemetry fetching catch exceptions when pCars is not running
+            // TODO: telemetry fetching: catch exceptions when pCars is not running
             telemetry = refreshTelemetry();
             // make sure track or car hasn't changed while running
             if (currentRun.times.Count != 0 && telemetry.gameStates.mGameState != 4 // ignore restarts
@@ -80,6 +80,8 @@ namespace Setup_Advisor
                     try
                     {
                         recordLap();
+                        // pause to avoid recording the lap more than once
+                        Thread.Sleep(2000);
                     }
                     catch (Exception exc)
                     {
@@ -100,7 +102,6 @@ namespace Setup_Advisor
 
         private void recordLap()
         {
-
             // on first lap, record car and track details
             if (currentRun.times.Count() == 0)
             {
@@ -136,7 +137,6 @@ namespace Setup_Advisor
                     updateTableSplitTimes();
                 }
             });
-            Thread.Sleep(2000);
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -251,6 +251,7 @@ namespace Setup_Advisor
             telemetry = refreshTelemetry();
             if (telemetry != null)
             {
+                // check the game is running a session - not in main menu or replay etc.
                 if (telemetry.gameStates.mGameState < 5 && telemetry.gameStates.mGameState > 1)
                 {
                     // track info exists but does not match - don't start run
